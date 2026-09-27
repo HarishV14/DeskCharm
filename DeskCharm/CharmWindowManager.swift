@@ -20,7 +20,7 @@ final class CharmWindowManager {
         
         // Window dimensions for hanging rope and charm
         let width: CGFloat = 120
-        let height: CGFloat = 200
+        let height: CGFloat = 210
         
         // Position window near the top-center of the primary macOS screen frame
         guard let primaryScreen = NSScreen.main else { return }
