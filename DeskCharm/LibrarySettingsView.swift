@@ -15,10 +15,10 @@ enum LibraryTab: String, CaseIterable, Identifiable {
 
 /// View rendering the DeskCharm Charm Library screen.
 struct LibrarySettingsView: View {
+    @ObservedObject private var selectionManager = CharmSelectionManager.shared
     @State private var selectedLibraryTab: LibraryTab = .charms
     @State private var selectedCategoryFilter: String = "all" // "all", "favorites", or categoryId
     @State private var searchText: String = ""
-    @State private var selectedCharmId: String? = "charm_blue_eye"
     
     private let catalog = CharmCatalog.shared
     
@@ -55,11 +55,8 @@ struct LibrarySettingsView: View {
     }
     
     // Currently selected charm for Header display
-    private var activeCharm: Charm? {
-        if let selectedId = selectedCharmId {
-            return catalog.charm(withId: selectedId)
-        }
-        return catalog.charms.first
+    private var activeCharm: Charm {
+        return selectionManager.currentCharm
     }
     
     var body: some View {
@@ -85,30 +82,52 @@ struct LibrarySettingsView: View {
                 
                 if selectedLibraryTab == .charms {
                     // MARK: - Current Charm Header Section
-                    if let current = activeCharm {
-                        HStack(spacing: 16) {
+                    let current = activeCharm
+                    let glowColor = CharmAssetResolver.glowColor(for: current)
+                    
+                    HStack(spacing: 16) {
+                            // Premium Charm Stage with dynamic ambient glow
                             ZStack {
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .fill(Color.accentColor.opacity(0.12))
+                                RadialGradient(
+                                    gradient: Gradient(colors: [
+                                        glowColor.opacity(0.35),
+                                        glowColor.opacity(0.08),
+                                        Color.clear
+                                    ]),
+                                    center: .center,
+                                    startRadius: 2,
+                                    endRadius: 28
+                                )
+                                .blur(radius: 6)
                                 
                                 CharmAssetResolver.view(for: current)
                                     .scaleEffect(0.65)
+                                    .shadow(color: glowColor.opacity(0.35), radius: 5, x: 0, y: 2)
                             }
-                            .frame(width: 54, height: 54)
+                            .frame(width: 60, height: 60)
+                            .background(
+                                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                    .fill(Color.black.opacity(0.25))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                    .stroke(Color.white.opacity(0.12), lineWidth: 1)
+                            )
                             
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Current Charm")
-                                    .font(.caption)
-                                    .fontWeight(.medium)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("CURRENT CHARM")
+                                    .font(.system(size: 10, weight: .bold))
                                     .foregroundColor(.secondary)
+                                    .tracking(0.5)
                                 
                                 Text(current.name)
-                                    .font(.headline)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
                                     .foregroundColor(.primary)
                                 
                                 if let region = current.countryOrRegion {
                                     Text(region)
-                                        .font(.caption2)
+                                        .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
                             }
@@ -117,14 +136,26 @@ struct LibrarySettingsView: View {
                             
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(.accentColor)
-                                .font(.title3)
+                                .font(.system(size: 22, weight: .bold))
+                                .shadow(color: Color.accentColor.opacity(0.3), radius: 3, x: 0, y: 1)
                         }
                         .padding(12)
                         .background(
-                            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                .fill(Color(NSColor.controlBackgroundColor))
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                    .fill(Color(NSColor.controlBackgroundColor).opacity(0.85))
+                                
+                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                    .stroke(
+                                        LinearGradient(
+                                            colors: [Color.accentColor.opacity(0.35), Color.white.opacity(0.06)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 1
+                                    )
+                            }
                         )
-                    }
                 }
             }
             .padding([.top, .horizontal], 20)
@@ -231,9 +262,11 @@ struct LibrarySettingsView: View {
                                             ForEach(collectionCharms) { charm in
                                                 CharmCardView(
                                                     charm: charm,
-                                                    isSelected: selectedCharmId == charm.id
+                                                    isSelected: selectionManager.selectedCharmId == charm.id
                                                 ) {
-                                                    selectedCharmId = charm.id
+                                                    withAnimation(.easeInOut(duration: 0.18)) {
+                                                        selectionManager.selectCharm(id: charm.id)
+                                                    }
                                                 }
                                             }
                                         }

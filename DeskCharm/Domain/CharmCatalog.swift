@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// Local catalog providing access to DeskCharm categories, collections, and starter charms.
+/// Local catalog providing access to DeskCharm categories, collections, and catalog charms.
 struct CharmCatalog {
     static let shared = CharmCatalog()
     
@@ -23,7 +23,7 @@ struct CharmCatalog {
         ]
         
         self.charms = [
-            // 1. Blue Eye (Starter Default Charm)
+            // 1. Blue Lucky Eye (Nazar)
             Charm(
                 id: "charm_blue_eye",
                 name: "Blue Lucky Eye",
@@ -36,23 +36,95 @@ struct CharmCatalog {
                 isFavorite: true
             ),
             
-            // 2. Hamsa Protection Charm
+            // 2. Hamsa Hand
             Charm(
                 id: "charm_hamsa",
                 name: "Hamsa Hand",
                 categoryId: CharmCategory.protectionAndSpiritual.id,
                 collectionId: CharmCollection.worldSpiritual.id,
                 assetIdentifier: "charm_hamsa",
-                countryOrRegion: "Middle East",
-                tags: ["hamsa", "protection", "hand", "spiritual"],
+                countryOrRegion: "Middle East / North Africa",
+                tags: ["hamsa", "protection", "hand", "spiritual", "gold"],
                 originType: .builtIn
             ),
             
-            // 3. Temple Bell
+            // 3. Drishti Bommai
+            Charm(
+                id: "charm_drishti_bommai",
+                name: "Drishti Bommai",
+                categoryId: CharmCategory.protectionAndSpiritual.id,
+                collectionId: CharmCollection.southIndian.id,
+                assetIdentifier: "charm_drishti_bommai",
+                countryOrRegion: "South India",
+                tags: ["drishti", "bommai", "mask", "protection", "tamil"],
+                originType: .builtIn
+            ),
+            
+            // 4. Nimbu-Mirchi
+            Charm(
+                id: "charm_nimbu_mirchi",
+                name: "Nimbu-Mirchi",
+                categoryId: CharmCategory.protectionAndSpiritual.id,
+                collectionId: CharmCollection.indianSpiritual.id,
+                assetIdentifier: "charm_nimbu_mirchi",
+                countryOrRegion: "India",
+                tags: ["lemon", "chili", "nimbu", "mirchi", "protection", "traditional"],
+                originType: .builtIn
+            ),
+            
+            // 5. Dream Catcher
+            Charm(
+                id: "charm_dream_catcher",
+                name: "Dream Catcher",
+                categoryId: CharmCategory.protectionAndSpiritual.id,
+                collectionId: CharmCollection.worldSpiritual.id,
+                assetIdentifier: "charm_dream_catcher",
+                countryOrRegion: "Native America",
+                tags: ["dreamcatcher", "feathers", "protection", "web", "sleep"],
+                originType: .builtIn
+            ),
+            
+            // 6. Chinese Knot
+            Charm(
+                id: "charm_chinese_knot",
+                name: "Chinese Knot",
+                categoryId: CharmCategory.protectionAndSpiritual.id,
+                collectionId: CharmCollection.worldSpiritual.id,
+                assetIdentifier: "charm_chinese_knot",
+                countryOrRegion: "China / East Asia",
+                tags: ["knot", "red", "jade", "luck", "fortune", "silk"],
+                originType: .builtIn
+            ),
+            
+            // 7. Daruma Doll
+            Charm(
+                id: "charm_daruma",
+                name: "Daruma Doll",
+                categoryId: CharmCategory.protectionAndSpiritual.id,
+                collectionId: CharmCollection.worldSpiritual.id,
+                assetIdentifier: "charm_daruma",
+                countryOrRegion: "Japan",
+                tags: ["daruma", "doll", "red", "perseverance", "luck"],
+                originType: .builtIn
+            ),
+            
+            // 8. Maneki-neko
+            Charm(
+                id: "charm_maneki_neko",
+                name: "Maneki-neko",
+                categoryId: CharmCategory.protectionAndSpiritual.id,
+                collectionId: CharmCollection.worldSpiritual.id,
+                assetIdentifier: "charm_maneki_neko",
+                countryOrRegion: "Japan",
+                tags: ["cat", "lucky", "manekineko", "gold", "fortune"],
+                originType: .builtIn
+            ),
+            
+            // 9. Temple Bell
             Charm(
                 id: "charm_temple_bell",
                 name: "Sacred Temple Bell",
-                categoryId: CharmCategory.indianCulture.id,
+                categoryId: CharmCategory.protectionAndSpiritual.id,
                 collectionId: CharmCollection.southIndian.id,
                 assetIdentifier: "charm_temple_bell",
                 countryOrRegion: "Tamil Nadu, India",
@@ -60,7 +132,7 @@ struct CharmCatalog {
                 originType: .builtIn
             ),
             
-            // 4. Sacred Lotus
+            // 10. Sacred Lotus
             Charm(
                 id: "charm_lotus",
                 name: "Sacred Lotus",
@@ -72,7 +144,7 @@ struct CharmCatalog {
                 originType: .builtIn
             ),
             
-            // 5. Lucky Coin
+            // 11. Lucky Coin
             Charm(
                 id: "charm_lucky_coin",
                 name: "Golden Lucky Coin",
@@ -84,7 +156,7 @@ struct CharmCatalog {
                 originType: .builtIn
             ),
             
-            // 6. Crescent Moon
+            // 12. Celestial Moon
             Charm(
                 id: "charm_moon",
                 name: "Celestial Moon",
@@ -96,7 +168,7 @@ struct CharmCatalog {
                 originType: .builtIn
             ),
             
-            // 7. Golden Star
+            // 13. Golden Star
             Charm(
                 id: "charm_star",
                 name: "Golden Star",
@@ -108,7 +180,7 @@ struct CharmCatalog {
                 originType: .builtIn
             ),
             
-            // 8. Traditional Protective Lemon
+            // 14. Traditional Protective Lemon
             Charm(
                 id: "charm_lemon",
                 name: "Protective Lemon",

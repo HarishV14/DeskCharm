@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject private var selectionManager = CharmSelectionManager.shared
+    
     @State private var pendulum = PendulumPhysics()
     @State private var isSimulating = false
     @State private var isDragging = false
@@ -24,25 +26,42 @@ struct ContentView: View {
             // Transparent background allowing mouse clicks outside the charm to pass through to desktop/apps
             Color.clear
             
-            // Hanging rope + charm assembly rotated around top fixed pivot point
+            // Hanging rope + selected charm assembly rotated around top fixed pivot point
             VStack(spacing: 0) {
                 RopeView(width: 2.5, height: pendulum.currentRopeHeight)
                 
-                CharmView()
-                    .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                            .onChanged { value in
-                                handleDragChanged(value)
-                            }
-                            .onEnded { value in
-                                handleDragEnded(value)
-                            }
-                    )
+                // Connector bead & active desktop charm artwork
+                VStack(spacing: -2) {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [Color(red: 0.95, green: 0.8, blue: 0.3), Color(red: 0.5, green: 0.3, blue: 0.1)],
+                                startPoint: .top, endPoint: .bottom
+                            )
+                        )
+                        .frame(width: 8, height: 8)
+                        .shadow(color: Color.black.opacity(0.3), radius: 1, x: 0, y: 1)
+                        .zIndex(1)
+                    
+                    CharmAssetResolver.view(for: selectionManager.currentCharm)
+                        .transition(.scale.combined(with: .opacity))
+                        .id(selectionManager.selectedCharmId)
+                        .gesture(
+                            DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                .onChanged { value in
+                                    handleDragChanged(value)
+                                }
+                                .onEnded { value in
+                                    handleDragEnded(value)
+                                }
+                        )
+                }
             }
             .rotationEffect(.radians(-pendulum.angle), anchor: .top)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.clear)
+        .animation(.easeInOut(duration: 0.2), value: selectionManager.selectedCharmId)
     }
     
     private func handleDragChanged(_ value: DragGesture.Value) {
