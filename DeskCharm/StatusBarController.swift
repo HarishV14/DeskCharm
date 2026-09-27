@@ -11,6 +11,7 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     private var menu: NSMenu
     private var showItem: NSMenuItem
     private var hideItem: NSMenuItem
+    private var settingsItem: NSMenuItem
     private var quitItem: NSMenuItem
     
     /// Returns the NSStatusBarButton instance associated with this status item.
@@ -26,6 +27,7 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         // Create menu items
         self.showItem = NSMenuItem(title: "Show Charm", action: #selector(showCharmClicked), keyEquivalent: "")
         self.hideItem = NSMenuItem(title: "Hide Charm", action: #selector(hideCharmClicked), keyEquivalent: "")
+        self.settingsItem = NSMenuItem(title: "Settings...", action: #selector(settingsClicked), keyEquivalent: "")
         self.quitItem = NSMenuItem(title: "Quit DeskCharm", action: #selector(quitClicked), keyEquivalent: "")
         
         super.init()
@@ -45,10 +47,13 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     private func setupMenu() {
         showItem.target = self
         hideItem.target = self
+        settingsItem.target = self
         quitItem.target = self
         
         menu.addItem(showItem)
         menu.addItem(hideItem)
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(settingsItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(quitItem)
         
@@ -72,6 +77,10 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     
     @objc private func hideCharmClicked() {
         CharmWindowManager.shared.hideCharm()
+    }
+    
+    @objc private func settingsClicked() {
+        SettingsWindowManager.shared.showSettingsWindow()
     }
     
     @objc private func quitClicked() {

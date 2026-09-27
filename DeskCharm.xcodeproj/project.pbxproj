@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2D02689B3069381B00ECEF04 /* DeskCharm/AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2D02689A3069381B00ECEF04 /* DeskCharm/AppIcon.icns */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2D0268503069381E00ECEF04 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		2D0268423069381B00ECEF04 /* DeskCharm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskCharm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02684F3069381E00ECEF04 /* DeskCharmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeskCharmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0268593069381E00ECEF04 /* DeskCharmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeskCharmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02689A3069381B00ECEF04 /* DeskCharm/AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DeskCharm/AppIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +84,7 @@
 				2D0268523069381E00ECEF04 /* DeskCharmTests */,
 				2D02685C3069381E00ECEF04 /* DeskCharmUITests */,
 				2D0268433069381B00ECEF04 /* Products */,
+				2D0268ED30694A5400ECEF04 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +96,14 @@
 				2D0268593069381E00ECEF04 /* DeskCharmUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2D0268ED30694A5400ECEF04 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2D02689A3069381B00ECEF04 /* DeskCharm/AppIcon.icns */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D02689B3069381B00ECEF04 /* DeskCharm/AppIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +413,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleIconFile = AppIcon;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
