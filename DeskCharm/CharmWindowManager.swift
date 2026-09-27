@@ -18,14 +18,15 @@ final class CharmWindowManager {
     func setupAndShowWindow() {
         guard window == nil else { return }
         
-        // Small fixed size suitable for a future hanging charm
-        let width: CGFloat = 140
-        let height: CGFloat = 180
+        // Window dimensions for hanging rope and charm
+        let width: CGFloat = 120
+        let height: CGFloat = 200
         
-        // Position window near the top-center of the primary macOS screen
-        let screenFrame = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 800, height: 600)
+        // Position window near the top-center of the primary macOS screen frame
+        guard let primaryScreen = NSScreen.main else { return }
+        let screenFrame = primaryScreen.frame
         let originX = screenFrame.midX - (width / 2.0)
-        let originY = screenFrame.maxY - height - 10.0
+        let originY = screenFrame.maxY - height
         
         let contentRect = NSRect(x: originX, y: originY, width: width, height: height)
         

@@ -9,15 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "sparkles")
-                .font(.system(size: 28))
-                .foregroundStyle(.tint)
-            Text("DeskCharm")
-                .font(.caption)
-                .fontWeight(.medium)
+        VStack(spacing: 0) {
+            // Simple vertical hanging rope
+            Capsule()
+                .fill(Color.primary.opacity(0.8))
+                .frame(width: 2.5, height: 120)
+            
+            // Circular placeholder charm
+            Circle()
+                .fill(Color.indigo)
+                .frame(width: 36, height: 36)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.clear)
     }
 }
