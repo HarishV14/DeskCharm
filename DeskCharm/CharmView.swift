@@ -88,6 +88,7 @@ struct CharmView: View {
                 .offset(x: 14, y: 16)
         }
         .frame(width: 72, height: 72)
+        .contentShape(Circle())
         .shadow(color: Color.black.opacity(0.35), radius: 5, x: 0, y: 4)
     }
 }

@@ -18,9 +18,9 @@ final class CharmWindowManager {
     func setupAndShowWindow() {
         guard window == nil else { return }
         
-        // Window dimensions for hanging rope and charm
-        let width: CGFloat = 120
-        let height: CGFloat = 210
+        // Window dimensions providing ample room for pendulum sway and rope stretch
+        let width: CGFloat = 500
+        let height: CGFloat = 320
         
         // Position window near the top-center of the primary macOS screen frame
         guard let primaryScreen = NSScreen.main else { return }
